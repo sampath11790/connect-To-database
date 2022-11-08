@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import AddMovies from "./components/AddMovies";
 
 import MoviesList from "./components/MoviesList";
 import "./App.css";
@@ -80,6 +81,9 @@ function App() {
 
   return (
     <React.Fragment>
+      <section>
+        <AddMovies></AddMovies>
+      </section>
       <section>
         <button onClick={fetchdataHandler}>Fetch Movies</button>
         <button onClick={cancelIntervel}>Cancel Request</button>
