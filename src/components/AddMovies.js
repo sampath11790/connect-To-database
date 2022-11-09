@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import UserInput from "./UserInput";
 import classes from "./AddMovies.module.css";
-const AddMovies = () => {
+const AddMovies = (props) => {
   const [enteredTitle, setenteredTitle] = useState("");
   const [enteredText, setenteredText] = useState("");
   const [enteredDate, setenteredDate] = useState("");
@@ -15,7 +15,8 @@ const AddMovies = () => {
       openiningText: enteredText,
       date: enteredDate,
     };
-    console.log(obj);
+    props.onaddmovieHandler(obj);
+    //console.log(obj);
   };
   const titleChangeHandler = (event) => {
     // console.log(event.target.value);
@@ -31,7 +32,7 @@ const AddMovies = () => {
   };
   return (
     <div>
-      <form onClick={fromHandler}>
+      <form onSubmit={fromHandler}>
         <UserInput
           //   ref={titleref}
           id="title"

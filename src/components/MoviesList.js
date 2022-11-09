@@ -1,14 +1,17 @@
-import React from 'react';
+import React from "react";
 
-import Movie from './Movie';
-import classes from './MoviesList.module.css';
+import Movie from "./Movie";
+import classes from "./MoviesList.module.css";
 
 const MovieList = (props) => {
+  //const f = <Movie a={props.ondeletemovieHandler}></Movie>;
   return (
-    <ul className={classes['movies-list']}>
+    <ul className={classes["movies-list"]}>
       {props.movies.map((movie) => (
         <Movie
+          deleteing={props.ondeletemovieHandler}
           key={movie.id}
+          id={movie.id}
           title={movie.title}
           releaseDate={movie.releaseDate}
           openingText={movie.openingText}
