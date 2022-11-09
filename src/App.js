@@ -8,10 +8,29 @@ function App() {
   const [Movies, setMovies] = useState([]);
   const [isLoading, setisLoading] = useState(false);
   const [error, seterror] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    let id;
+    if (isVisible) {
+      console.log("set time time");
+      id = setTimeout(
+        () =>
+          // console.log('settime time')
+          setIsVisible(false),
+        6000
+      );
+    }
+    return () => {
+      clearTimeout(id);
+    };
+  }, [isVisible]);
 
   const fetchdataHandler = useCallback(async () => {
+    // setdeletemessga(false);
     setisLoading(true);
     seterror(null);
+
     try {
       const responce = await fetch(
         "https://movies-671f6-default-rtdb.firebaseio.com/movielist.json"
@@ -99,7 +118,8 @@ function App() {
           },
         }
       );
-      console.log(deleteid);
+      // console.log(deleteid);
+      setIsVisible(true);
       fetchdataHandler();
     } catch (error) {
       console.log(error);
@@ -134,7 +154,15 @@ function App() {
         <button onClick={fetchdataHandler}>Fetch Movies</button>
         <button onClick={cancelIntervel}>Cancel Request</button>
       </section>
+      {isVisible && (
+        <section>
+          <h1>The selected Movie has deleted</h1>
+        </section>
+      )}
       <section>
+        {/* {deletemessgae &&
+          alert("your item has deleted", setdeletemessga(false))} */}
+
         {Content}
         {/* {!isLoading&& Movies.length>0&& <MoviesList movies={Movies} />}
         {!isLoading&& Movies.length===0&& <p>No movies Found</p>}
